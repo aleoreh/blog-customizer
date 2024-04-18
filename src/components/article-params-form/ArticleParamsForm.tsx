@@ -26,8 +26,9 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 		<>
 			<ArrowButton willCloseOnClick={props.open} onClick={toggleOpen} />
 			<aside
-				className={clsx(styles.container, props.open && styles.container_open)}>
-				<form className={styles.form} onClick={formClickHandler}>
+				className={clsx(styles.container, props.open && styles.container_open)}
+				onClick={formClickHandler}>
+				<form className={styles.form} onSubmit={formSubmit}>
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' />
 						<Button title='Применить' type='submit' />
