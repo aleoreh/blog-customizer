@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, CSSProperties } from 'react';
+import { StrictMode, CSSProperties, useState } from 'react';
 import clsx from 'clsx';
 
 import { Article } from './components/article/Article';
@@ -13,6 +13,18 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
+	// видимость формы параметорв
+	const [articleParamsFormOpened, setArticleParamsFormOpened] =
+		useState<boolean>(false);
+
+	// клик на корневом элементе закрывает открытую(!) форму параметров
+	const paramsFormCloseHandler = (ev: React.MouseEvent) => {
+		if (articleParamsFormOpened) {
+			setArticleParamsFormOpened(false);
+			ev.stopPropagation();
+		}
+	};
+
 	return (
 		<div
 			className={clsx(styles.main)}
@@ -24,8 +36,12 @@ const App = () => {
 					'--container-width': defaultArticleState.contentWidth.value,
 					'--bg-color': defaultArticleState.backgroundColor.value,
 				} as CSSProperties
-			}>
-			<ArticleParamsForm />
+			}
+			onClick={paramsFormCloseHandler}>
+			<ArticleParamsForm
+				open={articleParamsFormOpened}
+				setOpen={setArticleParamsFormOpened}
+			/>
 			<Article />
 		</div>
 	);
