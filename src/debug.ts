@@ -1,11 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type DebugLog = (...data: any) => <T>(value: T) => T;
-
-const log: DebugLog = (...data) => {
-	return <T>(value: T) => {
-		console.log(...data);
-		return value;
-	};
+const log = (...data: any) => {
+	console.log(...data);
+	return <T>(x: T) => x;
 };
 
 export class Debug {
@@ -22,5 +18,3 @@ export class Debug {
 
 	static log = log;
 }
-
-export default Debug;
