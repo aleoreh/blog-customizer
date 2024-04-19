@@ -16,7 +16,7 @@ export const ArrowButtonStory: Story = {
 				<ArrowButton
 					willCloseOnClick={true}
 					onClick={() => {
-						console.log('arrow button click');
+						console.log('story: arrow button click');
 					}}
 				/>
 			</>
