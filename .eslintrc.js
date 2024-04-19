@@ -38,6 +38,6 @@ module.exports = {
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
 		'react-hooks/exhaustive-deps': 'off',
 		'import/no-named-as-default': 'off',
-		'no-restricted-imports': ['warn', { patterns: ['*/**/debug'] }],
+		'no-restricted-imports': ['error', { patterns: ['*/**/debug'] }],
 	},
 };
