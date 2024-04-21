@@ -23,17 +23,24 @@ const defaultStyle = {
 type ArticleStyle = typeof defaultStyle;
 
 const App = () => {
-	const [articleStyle] = useState<ArticleStyle>(defaultStyle);
+	const [articleStyle, setArticeStyle] = useState<ArticleStyle>(defaultStyle);
+	const [inputArticleStyle] = useState<ArticleStyle>(articleStyle);
 
 	// видимость формы параметорв
 	const [articleParamsFormOpened, setArticleParamsFormOpened] =
 		useState<boolean>(false);
+
+	const submitArticleParamsForm = () => {
+		setArticeStyle(inputArticleStyle);
+		setArticleParamsFormOpened(false);
+	};
 
 	return (
 		<div className={clsx(styles.main)} style={articleStyle as CSSProperties}>
 			<ArticleParamsForm
 				open={articleParamsFormOpened}
 				setOpen={setArticleParamsFormOpened}
+				submit={submitArticleParamsForm}
 			/>
 			<Article />
 		</div>

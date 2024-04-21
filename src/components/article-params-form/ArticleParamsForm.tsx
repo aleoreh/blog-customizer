@@ -7,10 +7,12 @@ import { useOutsideClick } from 'src/hooks/useOutsideClick';
 import styles from './ArticleParamsForm.module.scss';
 
 export type SetOpen = (value: boolean) => void;
+export type Submit = () => void;
 
 type ArticleParamsFormProps = {
 	open: boolean;
 	setOpen: SetOpen;
+	submit: Submit;
 };
 
 export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
@@ -21,6 +23,7 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 	};
 	const formSubmit = (evt: React.FormEvent) => {
 		evt.preventDefault();
+		props.submit();
 	};
 	useOutsideClick({
 		rootRefs: [containerRef, buttonRef],
