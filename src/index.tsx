@@ -8,6 +8,7 @@ import { defaultArticleState } from './constants/articleProps';
 
 import styles from './styles/index.module.scss';
 import './styles/index.scss';
+import { InputArticleParams } from './components/input-article-params';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
@@ -40,8 +41,9 @@ const App = () => {
 			<ArticleParamsForm
 				open={articleParamsFormOpened}
 				setOpen={setArticleParamsFormOpened}
-				submit={submitArticleParamsForm}
-			/>
+				submit={submitArticleParamsForm}>
+				<InputArticleParams />
+			</ArticleParamsForm>
 			<Article />
 		</div>
 	);

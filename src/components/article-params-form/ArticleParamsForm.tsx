@@ -13,6 +13,7 @@ type ArticleParamsFormProps = {
 	open: boolean;
 	setOpen: SetOpen;
 	submit: Submit;
+	children: JSX.Element;
 };
 
 export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
@@ -40,6 +41,7 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 				ref={containerRef}
 				className={clsx(styles.container, props.open && styles.container_open)}>
 				<form className={styles.form} onSubmit={formSubmit}>
+					{props.children}
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' />
 						<Button title='Применить' type='submit' />
