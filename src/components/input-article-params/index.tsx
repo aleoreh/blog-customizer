@@ -1,0 +1,1 @@
+export { InputArticleParams } from './InputArticleParams';
