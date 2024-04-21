@@ -12,23 +12,25 @@ import './styles/index.scss';
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
+const defaultStyle = {
+	'--font-family': defaultArticleState.fontFamilyOption.value,
+	'--font-size': defaultArticleState.fontSizeOption.value,
+	'--font-color': defaultArticleState.fontColor.value,
+	'--container-width': defaultArticleState.contentWidth.value,
+	'--bg-color': defaultArticleState.backgroundColor.value,
+};
+
+type ArticleStyle = typeof defaultStyle;
+
 const App = () => {
+	const [articleStyle] = useState<ArticleStyle>(defaultStyle);
+
 	// видимость формы параметорв
 	const [articleParamsFormOpened, setArticleParamsFormOpened] =
 		useState<boolean>(false);
 
 	return (
-		<div
-			className={clsx(styles.main)}
-			style={
-				{
-					'--font-family': defaultArticleState.fontFamilyOption.value,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
-				} as CSSProperties
-			}>
+		<div className={clsx(styles.main)} style={articleStyle as CSSProperties}>
 			<ArticleParamsForm
 				open={articleParamsFormOpened}
 				setOpen={setArticleParamsFormOpened}
