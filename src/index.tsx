@@ -6,9 +6,9 @@ import { ArticleParamsForm } from './components/article-params-form/ArticleParam
 import { Article } from './components/article/Article';
 import { defaultArticleState } from './constants/articleProps';
 
+import { InputArticleParams } from './components/input-article-params';
 import styles from './styles/index.module.scss';
 import './styles/index.scss';
-import { InputArticleParams } from './components/input-article-params';
 import { ArticleStyle } from './types';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
@@ -24,7 +24,8 @@ const defaultStyle: ArticleStyle = {
 
 const App = () => {
 	const [articleStyle, setArticeStyle] = useState<ArticleStyle>(defaultStyle);
-	const [inputArticleStyle] = useState<ArticleStyle>(articleStyle);
+	const [inputArticleStyle, setInputArticleStyle] =
+		useState<ArticleStyle>(articleStyle);
 
 	// видимость формы параметорв
 	const [articleParamsFormOpened, setArticleParamsFormOpened] =
@@ -41,7 +42,10 @@ const App = () => {
 				open={articleParamsFormOpened}
 				setOpen={setArticleParamsFormOpened}
 				submit={submitArticleParamsForm}>
-				<InputArticleParams />
+				<InputArticleParams
+					input={inputArticleStyle}
+					setInput={setInputArticleStyle}
+				/>
 			</ArticleParamsForm>
 			<Article />
 		</div>
