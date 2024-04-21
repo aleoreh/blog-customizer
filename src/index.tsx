@@ -9,19 +9,18 @@ import { defaultArticleState } from './constants/articleProps';
 import styles from './styles/index.module.scss';
 import './styles/index.scss';
 import { InputArticleParams } from './components/input-article-params';
+import { ArticleStyle } from './types';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
-const defaultStyle = {
+const defaultStyle: ArticleStyle = {
 	'--font-family': defaultArticleState.fontFamilyOption.value,
 	'--font-size': defaultArticleState.fontSizeOption.value,
 	'--font-color': defaultArticleState.fontColor.value,
 	'--container-width': defaultArticleState.contentWidth.value,
 	'--bg-color': defaultArticleState.backgroundColor.value,
 };
-
-type ArticleStyle = typeof defaultStyle;
 
 const App = () => {
 	const [articleStyle, setArticeStyle] = useState<ArticleStyle>(defaultStyle);
