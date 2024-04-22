@@ -1,5 +1,6 @@
 import {
 	OptionType,
+	backgroundColors,
 	fontColors,
 	fontFamilyOptions,
 	fontSizeOptions,
@@ -8,6 +9,7 @@ import { ArticleStyle } from 'src/types';
 import { Select } from '../select';
 import { Text } from '../text';
 import { RadioGroup } from '../radio-group';
+import { Separator } from '../separator';
 
 type InputArticleParams = (props: {
 	input: ArticleStyle;
@@ -41,6 +43,15 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 		setInput({ ...input, '--font-color': fontColor.value });
 	};
 
+	// цвет фона
+	const defaultBackgroundColor =
+		backgroundColors.find((x) => x.value === input['--bg-color']) ||
+		backgroundColors[0];
+
+	const onBackgroundColorSelected = (bgColor: OptionType) => {
+		setInput({ ...input, '--bg-color': bgColor.value });
+	};
+
 	return (
 		<>
 			<Text size={31} weight={800} uppercase>
@@ -64,6 +75,13 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 				options={fontColors}
 				selected={defaultFontColor}
 				onChange={onFontColorSelected}
+			/>
+			<Separator />
+			<Select
+				title='Цвет фона'
+				options={backgroundColors}
+				selected={defaultBackgroundColor}
+				onChange={onBackgroundColorSelected}
 			/>
 		</>
 	);
