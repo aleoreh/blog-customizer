@@ -1,7 +1,12 @@
-import { OptionType, fontFamilyOptions } from 'src/constants/articleProps';
+import {
+	OptionType,
+	fontFamilyOptions,
+	fontSizeOptions,
+} from 'src/constants/articleProps';
 import { ArticleStyle } from 'src/types';
 import { Select } from '../select';
 import { Text } from '../text';
+import { RadioGroup } from '../radio-group';
 
 type InputArticleParams = (props: {
 	input: ArticleStyle;
@@ -18,6 +23,15 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 		setInput({ ...input, '--font-family': font.value });
 	};
 
+	// размер шрифта
+	const defaultFontSize =
+		fontSizeOptions.find((x) => x.value === input['--font-size']) ||
+		fontSizeOptions[0];
+
+	const onFontSizeSelected = (fontSize: OptionType) => {
+		setInput({ ...input, '--font-size': fontSize.value });
+	};
+
 	return (
 		<>
 			<Text size={31} weight={800} uppercase>
@@ -28,6 +42,13 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 				options={fontFamilyOptions}
 				selected={defaultFont}
 				onChange={onFontSelected}
+			/>
+			<RadioGroup
+				title='Размер шрифта'
+				name='fontSize'
+				options={fontSizeOptions}
+				selected={defaultFontSize}
+				onChange={onFontSizeSelected}
 			/>
 		</>
 	);
