@@ -33,7 +33,10 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 		fontSizeOptions[0];
 
 	const onFontSizeSelected = (fontSize: OptionType) => {
-		setInput({ ...input, '--font-size': fontSize.value });
+		setInput({
+			...input,
+			'--font-size': fontSize.value,
+		});
 	};
 
 	// цвет текста
@@ -74,6 +77,7 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 				onChange={onFontSelected}
 			/>
 			<RadioGroup
+				key={input['--font-size']}
 				title='Размер шрифта'
 				name='fontSize'
 				options={fontSizeOptions}
