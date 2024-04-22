@@ -1,5 +1,6 @@
 import {
 	OptionType,
+	fontColors,
 	fontFamilyOptions,
 	fontSizeOptions,
 } from 'src/constants/articleProps';
@@ -32,6 +33,14 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 		setInput({ ...input, '--font-size': fontSize.value });
 	};
 
+	// цвет текста
+	const defaultFontColor =
+		fontColors.find((x) => x.value === input['--font-color']) || fontColors[0];
+
+	const onFontColorSelected = (fontColor: OptionType) => {
+		setInput({ ...input, '--font-color': fontColor.value });
+	};
+
 	return (
 		<>
 			<Text size={31} weight={800} uppercase>
@@ -49,6 +58,12 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 				options={fontSizeOptions}
 				selected={defaultFontSize}
 				onChange={onFontSizeSelected}
+			/>
+			<Select
+				title='Цвет шрифта'
+				options={fontColors}
+				selected={defaultFontColor}
+				onChange={onFontColorSelected}
 			/>
 		</>
 	);
