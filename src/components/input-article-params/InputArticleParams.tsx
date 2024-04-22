@@ -1,6 +1,7 @@
 import {
 	OptionType,
 	backgroundColors,
+	contentWidthArr,
 	fontColors,
 	fontFamilyOptions,
 	fontSizeOptions,
@@ -52,6 +53,15 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 		setInput({ ...input, '--bg-color': bgColor.value });
 	};
 
+	// ширина контента
+	const defaultContentWidth =
+		contentWidthArr.find((x) => x.value === input['--container-width']) ||
+		contentWidthArr[0];
+
+	const onContentWidthSelected = (contentWidth: OptionType) => {
+		setInput({ ...input, '--container-width': contentWidth.value });
+	};
+
 	return (
 		<>
 			<Text size={31} weight={800} uppercase>
@@ -82,6 +92,12 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 				options={backgroundColors}
 				selected={defaultBackgroundColor}
 				onChange={onBackgroundColorSelected}
+			/>
+			<Select
+				title='Ширина контента'
+				options={contentWidthArr}
+				selected={defaultContentWidth}
+				onChange={onContentWidthSelected}
 			/>
 		</>
 	);
