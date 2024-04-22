@@ -22,7 +22,10 @@ const defaultStyle: ArticleStyle = {
 };
 
 const App = () => {
+	// стиль, который применяется к статье
 	const [articleStyle, setArticeStyle] = useState<ArticleStyle>(defaultStyle);
+
+	// стиль, который вводится пользователем
 	const [inputArticleStyle, setInputArticleStyle] =
 		useState<ArticleStyle>(articleStyle);
 
@@ -30,6 +33,7 @@ const App = () => {
 	const [articleParamsFormOpened, setArticleParamsFormOpened] =
 		useState<boolean>(false);
 
+	// при утверждении формы ввода параметров устанавливаем их в стили статьи
 	const submitArticleParamsForm = () => {
 		setArticeStyle(inputArticleStyle);
 		setArticleParamsFormOpened(false);
@@ -46,6 +50,7 @@ const App = () => {
 				setOpen={setArticleParamsFormOpened}
 				submit={submitArticleParamsForm}
 				reset={resetArticleParamsForm}>
+				{/* поля ввода параметров передаются как "дети" формы */}
 				<InputArticleParams
 					input={inputArticleStyle}
 					setInput={setInputArticleStyle}

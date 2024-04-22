@@ -19,15 +19,21 @@ type ArticleParamsFormProps = {
 };
 
 export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
+	// ссылка на элемент контейнера для формы
 	const containerRef = useRef<HTMLElement>(null);
+
+	// ссылка на кнопку переключения видимости формы
 	const buttonRef = useRef<HTMLDivElement>(null);
+
 	const toggleOpen = () => {
 		props.setOpen(!props.open);
 	};
+
 	const formSubmit = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		props.submit();
 	};
+
 	const formReset = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		props.reset();
@@ -36,6 +42,7 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 		rootRefs: [containerRef, buttonRef],
 		onClick: () => props.setOpen(false),
 	});
+
 	return (
 		<>
 			<ArrowButton

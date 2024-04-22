@@ -5,6 +5,9 @@ type UseOutsideClick = (params: {
 	rootRefs: React.RefObject<HTMLElement> | Array<React.RefObject<HTMLElement>>;
 }) => void;
 
+/**
+ * Выполняет onClick при клике за пределами переданных ссылок rootRefs
+ */
 export const useOutsideClick: UseOutsideClick = ({ rootRefs, onClick }) => {
 	useEffect(() => {
 		const normalizedRootRefs = Array.isArray(rootRefs) ? rootRefs : [rootRefs];
