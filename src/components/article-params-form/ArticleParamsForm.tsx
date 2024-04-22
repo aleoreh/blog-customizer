@@ -25,6 +25,11 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 	// ссылка на кнопку переключения видимости формы
 	const buttonRef = useRef<HTMLDivElement>(null);
 
+	useOutsideClick({
+		rootRefs: [containerRef, buttonRef],
+		onClick: () => props.setOpen(false),
+	});
+
 	const toggleOpen = () => {
 		props.setOpen(!props.open);
 	};
@@ -38,10 +43,6 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 		evt.preventDefault();
 		props.reset();
 	};
-	useOutsideClick({
-		rootRefs: [containerRef, buttonRef],
-		onClick: () => props.setOpen(false),
-	});
 
 	return (
 		<>
