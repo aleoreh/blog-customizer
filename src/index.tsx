@@ -41,6 +41,8 @@ const App = () => {
 
 	const resetArticleParamsForm = () => {
 		setInputArticleStyle(defaultStyle);
+		setArticeStyle(defaultStyle);
+		setArticleParamsFormOpened(false);
 	};
 
 	return (
