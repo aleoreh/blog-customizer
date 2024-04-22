@@ -4,9 +4,8 @@ import { createRoot } from 'react-dom/client';
 
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
 import { Article } from './components/article/Article';
-import { defaultArticleState } from './constants/articleProps';
-
 import { InputArticleParams } from './components/input-article-params';
+import { defaultArticleState } from './constants/articleProps';
 import styles from './styles/index.module.scss';
 import './styles/index.scss';
 import { ArticleStyle } from './types';

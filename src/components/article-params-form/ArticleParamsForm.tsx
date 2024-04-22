@@ -1,8 +1,8 @@
-import { ArrowButton } from 'components/arrow-button';
-import { Button } from 'components/button';
-
 import clsx from 'clsx';
 import { useRef } from 'react';
+
+import { ArrowButton } from 'components/arrow-button';
+import { Button } from 'components/button';
 import { useOutsideClick } from 'src/hooks/useOutsideClick';
 import styles from './ArticleParamsForm.module.scss';
 

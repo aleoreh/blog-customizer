@@ -7,10 +7,10 @@ import {
 	fontSizeOptions,
 } from 'src/constants/articleProps';
 import { ArticleStyle } from 'src/types';
-import { Select } from '../select';
-import { Text } from '../text';
 import { RadioGroup } from '../radio-group';
+import { Select } from '../select';
 import { Separator } from '../separator';
+import { Text } from '../text';
 
 type InputArticleParams = (props: {
 	input: ArticleStyle;
