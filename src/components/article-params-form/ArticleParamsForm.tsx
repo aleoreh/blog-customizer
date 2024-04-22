@@ -39,7 +39,10 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 			/>
 			<aside
 				ref={containerRef}
-				className={clsx(styles.container, props.open && styles.container_open)}>
+				className={clsx(styles.container, props.open && styles.container_open)}
+				onClick={(ev) => {
+					ev.stopPropagation();
+				}}>
 				<form className={styles.form} onSubmit={formSubmit}>
 					{props.children}
 					<div className={styles.bottomContainer}>
