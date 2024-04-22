@@ -8,11 +8,13 @@ import styles from './ArticleParamsForm.module.scss';
 
 export type SetOpen = (value: boolean) => void;
 export type Submit = () => void;
+export type Reset = () => void;
 
 type ArticleParamsFormProps = {
 	open: boolean;
 	setOpen: SetOpen;
 	submit: Submit;
+	reset: Reset;
 	children: JSX.Element;
 };
 
@@ -25,6 +27,10 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 	const formSubmit = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		props.submit();
+	};
+	const formReset = (evt: React.FormEvent) => {
+		evt.preventDefault();
+		props.reset();
 	};
 	useOutsideClick({
 		rootRefs: [containerRef, buttonRef],
@@ -43,7 +49,7 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 				onClick={(ev) => {
 					ev.stopPropagation();
 				}}>
-				<form className={styles.form} onSubmit={formSubmit}>
+				<form className={styles.form} onSubmit={formSubmit} onReset={formReset}>
 					{props.children}
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' />

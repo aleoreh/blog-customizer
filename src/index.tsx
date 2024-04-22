@@ -36,12 +36,17 @@ const App = () => {
 		setArticleParamsFormOpened(false);
 	};
 
+	const resetArticleParamsForm = () => {
+		setInputArticleStyle(defaultStyle);
+	};
+
 	return (
 		<div className={clsx(styles.main)} style={articleStyle as CSSProperties}>
 			<ArticleParamsForm
 				open={articleParamsFormOpened}
 				setOpen={setArticleParamsFormOpened}
-				submit={submitArticleParamsForm}>
+				submit={submitArticleParamsForm}
+				reset={resetArticleParamsForm}>
 				<InputArticleParams
 					input={inputArticleStyle}
 					setInput={setInputArticleStyle}
