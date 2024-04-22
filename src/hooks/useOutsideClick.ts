@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
-type UseOutsideClick = {
+type UseOutsideClick = (params: {
 	onClick?: () => void;
 	rootRefs: React.RefObject<HTMLElement> | Array<React.RefObject<HTMLElement>>;
-};
+}) => void;
 
-export const useOutsideClick = ({ rootRefs, onClick }: UseOutsideClick) => {
+export const useOutsideClick: UseOutsideClick = ({ rootRefs, onClick }) => {
 	useEffect(() => {
 		const normalizedRootRefs = Array.isArray(rootRefs) ? rootRefs : [rootRefs];
 		const handleClick = (event: MouseEvent) => {
