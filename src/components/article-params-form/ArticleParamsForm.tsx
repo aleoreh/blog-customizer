@@ -34,12 +34,12 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 		props.setOpen(!props.open);
 	};
 
-	const formSubmit = (evt: React.FormEvent) => {
+	const submitForm = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		props.submit();
 	};
 
-	const formReset = (evt: React.FormEvent) => {
+	const resetForm = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		props.reset();
 	};
@@ -59,8 +59,8 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 				}}>
 				<form
 					className={clsx(styles.form, styles.form_spacing)}
-					onSubmit={formSubmit}
-					onReset={formReset}>
+					onSubmit={submitForm}
+					onReset={resetForm}>
 					{props.children}
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' />
