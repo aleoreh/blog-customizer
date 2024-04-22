@@ -17,6 +17,9 @@ type InputArticleParams = (props: {
 	setInput: (articleStyle: ArticleStyle) => void;
 }) => JSX.Element;
 
+/**
+ * Компонент, отображающий поля ввода настроек
+ */
 export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 	// семейство шрифтов
 	const defaultFont =
