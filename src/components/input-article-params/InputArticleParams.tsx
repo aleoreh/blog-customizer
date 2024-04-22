@@ -1,17 +1,15 @@
 import { backgroundColors } from 'src/constants/articleProps';
 import { ArticleStyle } from 'src/types';
 
-type InputArticleParamsProps = {
+type InputArticleParams = (props: {
 	input: ArticleStyle;
 	setInput: (articleStyle: ArticleStyle) => void;
-};
+}) => JSX.Element;
 
-export const InputArticleParams = (
-	props: InputArticleParamsProps
-): JSX.Element => {
+export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 	const dummyClickHandler = () => {
-		props.setInput({
-			...props.input,
+		setInput({
+			...input,
 			'--bg-color': backgroundColors[1].value,
 		});
 	};
