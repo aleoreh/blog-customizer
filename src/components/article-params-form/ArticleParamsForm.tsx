@@ -41,11 +41,8 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 	// ссылка на элемент контейнера для формы
 	const containerRef = useRef<HTMLElement>(null);
 
-	// ссылка на кнопку переключения видимости формы
-	const buttonRef = useRef<HTMLDivElement>(null);
-
 	useOutsideClick({
-		rootRefs: [containerRef, buttonRef],
+		rootRefs: containerRef,
 		onClick: () => setIsOpened(false),
 	});
 
@@ -77,11 +74,7 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 
 	return (
 		<>
-			<ArrowButton
-				ref={buttonRef}
-				willCloseOnClick={isOpened}
-				onClick={toggleOpen}
-			/>
+			<ArrowButton willCloseOnClick={isOpened} onClick={toggleOpen} />
 			<aside
 				ref={containerRef}
 				className={clsx(styles.container, isOpened && styles.container_open)}
