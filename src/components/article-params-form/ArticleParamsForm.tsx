@@ -78,8 +78,8 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 			<aside
 				ref={containerRef}
 				className={clsx(styles.container, isOpened && styles.container_open)}
-				onClick={(ev) => {
-					ev.stopPropagation();
+				onClick={(evt) => {
+					evt.stopPropagation();
 				}}>
 				<form className={styles.form} onSubmit={submitForm} onReset={resetForm}>
 					<Text size={31} weight={800} uppercase>
