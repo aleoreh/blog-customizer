@@ -57,10 +57,7 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 				onClick={(ev) => {
 					ev.stopPropagation();
 				}}>
-				<form
-					className={clsx(styles.form, styles.form_spacing)}
-					onSubmit={submitForm}
-					onReset={resetForm}>
+				<form className={styles.form} onSubmit={submitForm} onReset={resetForm}>
 					{props.children}
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' />
