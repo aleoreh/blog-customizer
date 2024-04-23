@@ -35,7 +35,7 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 	const [isOpened, setIsOpened] = useState<boolean>(false);
 
 	// ссылка на элемент контейнера для формы
-	const containerRef = useRef<HTMLElement | null>(null);
+	const containerRef = useRef<HTMLDivElement | null>(null);
 
 	useModalClose({
 		isOpened,
@@ -66,13 +66,12 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 		};
 
 	return (
-		<>
+		<div ref={containerRef} className='form-container'>
 			<ArrowButton
 				willCloseOnClick={isOpened}
 				onClick={() => setIsOpened(!isOpened)}
 			/>
 			<aside
-				ref={containerRef}
 				className={clsx(styles.container, isOpened && styles.container_open)}>
 				<form className={styles.form} onSubmit={submitForm} onReset={resetForm}>
 					<Text size={31} weight={800} uppercase>
@@ -117,6 +116,6 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 					</div>
 				</form>
 			</aside>
-		</>
+		</div>
 	);
 };
