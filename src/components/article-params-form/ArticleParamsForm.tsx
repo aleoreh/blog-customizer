@@ -46,10 +46,6 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 		onClick: () => setIsOpened(false),
 	});
 
-	const toggleOpen = () => {
-		setIsOpened(!isOpened);
-	};
-
 	const submitForm = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		submit(inputArticleStyleState);
@@ -74,7 +70,10 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 
 	return (
 		<>
-			<ArrowButton willCloseOnClick={isOpened} onClick={toggleOpen} />
+			<ArrowButton
+				willCloseOnClick={isOpened}
+				onClick={() => setIsOpened(!isOpened)}
+			/>
 			<aside
 				ref={containerRef}
 				className={clsx(styles.container, isOpened && styles.container_open)}
