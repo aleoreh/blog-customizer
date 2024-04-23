@@ -53,7 +53,7 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 		setIsOpened(!isOpened);
 	};
 
-	const submitForm = (evt: React.FormEvent) => {
+	const submitForm = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
 		props.submit(inputArticleStyleState);
 		setIsOpened(false);
