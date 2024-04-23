@@ -3,18 +3,15 @@ import arrow from 'src/images/arrow.svg';
 import clsx from 'clsx';
 import styles from './ArrowButton.module.scss';
 
-/** Функция для обработки открытия/закрытия формы */
-export type OnClick = () => void;
-
-type ArrowButtonProps = {
+type ArrowButton = (props: {
 	willCloseOnClick: boolean;
-	onClick: OnClick;
-};
+	onClick: () => void;
+}) => JSX.Element;
 
-export const ArrowButton = (props: ArrowButtonProps) => {
+export const ArrowButton: ArrowButton = ({ willCloseOnClick, onClick }) => {
 	const clickHandler = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		evt.stopPropagation();
-		props.onClick();
+		onClick();
 	};
 
 	return (
@@ -25,19 +22,14 @@ export const ArrowButton = (props: ArrowButtonProps) => {
 			tabIndex={0}
 			className={clsx(
 				styles.container,
-				props.willCloseOnClick && styles.container_open
+				willCloseOnClick && styles.container_open
 			)}
 			onClick={clickHandler}>
 			<img
 				src={arrow}
 				alt='иконка стрелочки'
-				className={clsx(
-					styles.arrow,
-					props.willCloseOnClick && styles.arrow_open
-				)}
+				className={clsx(styles.arrow, willCloseOnClick && styles.arrow_open)}
 			/>
 		</div>
 	);
 };
-
-ArrowButton.displayName = 'ArrowButton';

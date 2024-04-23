@@ -25,12 +25,12 @@ export type SetOpen = (value: boolean) => void;
 export type Submit = (articleState: ArticleStateType) => void;
 export type Reset = () => void;
 
-type ArticleParamsFormProps = {
+type ArticleParamsForm = (props: {
 	submit: Submit;
 	reset: Reset;
-};
+}) => JSX.Element;
 
-export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
+export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 	// стиль, который вводится пользователем
 	const [inputArticleStyleState, setInputArticleStyleState] =
 		useState<ArticleStateType>(defaultArticleState);
@@ -52,14 +52,14 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 
 	const submitForm = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
-		props.submit(inputArticleStyleState);
+		submit(inputArticleStyleState);
 		setIsOpened(false);
 	};
 
 	const resetForm = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		setInputArticleStyleState(defaultArticleState);
-		props.reset();
+		reset();
 		setIsOpened(false);
 	};
 
