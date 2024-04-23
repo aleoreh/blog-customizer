@@ -23,19 +23,13 @@ export const App = () => {
 	const [articleStyleState, setArticleStyleState] =
 		useState<ArticleStateType>(defaultArticleState);
 
-	// видимость формы параметров
-	const [articleParamsFormOpened, setArticleParamsFormOpened] =
-		useState<boolean>(false);
-
 	// при утверждении формы ввода параметров устанавливаем их в стили статьи
 	const submitArticleParamsForm = (articleState: ArticleStateType) => {
 		setArticleStyleState(articleState);
-		setArticleParamsFormOpened(false);
 	};
 
 	const onArticleParamsFormReset = () => {
 		setArticleStyleState(defaultArticleState);
-		setArticleParamsFormOpened(false);
 	};
 
 	return (
@@ -43,8 +37,6 @@ export const App = () => {
 			className={clsx(styles.main)}
 			style={articleStateToStyle(articleStyleState) as CSSProperties}>
 			<ArticleParamsForm
-				open={articleParamsFormOpened}
-				setOpen={setArticleParamsFormOpened}
 				submit={submitArticleParamsForm}
 				reset={onArticleParamsFormReset}></ArticleParamsForm>
 			<Article />

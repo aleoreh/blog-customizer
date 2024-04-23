@@ -26,8 +26,6 @@ export type Submit = (articleState: ArticleStateType) => void;
 export type Reset = () => void;
 
 type ArticleParamsFormProps = {
-	open: boolean;
-	setOpen: SetOpen;
 	submit: Submit;
 	reset: Reset;
 };
@@ -37,6 +35,9 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 	const [inputArticleStyleState, setInputArticleStyleState] =
 		useState<ArticleStateType>(defaultArticleState);
 
+	// видимость этой формы
+	const [isOpened, setIsOpened] = useState<boolean>(false);
+
 	// ссылка на элемент контейнера для формы
 	const containerRef = useRef<HTMLElement>(null);
 
@@ -45,22 +46,24 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 
 	useOutsideClick({
 		rootRefs: [containerRef, buttonRef],
-		onClick: () => props.setOpen(false),
+		onClick: () => setIsOpened(false),
 	});
 
 	const toggleOpen = () => {
-		props.setOpen(!props.open);
+		setIsOpened(!isOpened);
 	};
 
 	const submitForm = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		props.submit(inputArticleStyleState);
+		setIsOpened(false);
 	};
 
 	const resetForm = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		setInputArticleStyleState(defaultArticleState);
 		props.reset();
+		setIsOpened(false);
 	};
 
 	const onOptionSelected =
@@ -76,12 +79,12 @@ export const ArticleParamsForm = (props: ArticleParamsFormProps) => {
 		<>
 			<ArrowButton
 				ref={buttonRef}
-				willCloseOnClick={props.open}
+				willCloseOnClick={isOpened}
 				onClick={toggleOpen}
 			/>
 			<aside
 				ref={containerRef}
-				className={clsx(styles.container, props.open && styles.container_open)}
+				className={clsx(styles.container, isOpened && styles.container_open)}
 				onClick={(ev) => {
 					ev.stopPropagation();
 				}}>
