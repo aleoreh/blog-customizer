@@ -17,7 +17,8 @@ export const useModalClose: UseModalClose = ({
 		const normalizedSelfRefs = Array.isArray(selfRefs) ? selfRefs : [selfRefs];
 
 		// отлавливается на элементах, НЕ включенных в selfRefs
-		const handleMousedown = ({ target }: MouseEvent) => {
+		const handleMousedown = (evt: MouseEvent) => {
+			const { target } = evt;
 			if (
 				target instanceof Node &&
 				!normalizedSelfRefs.some((ref) => ref.current?.contains(target))
@@ -26,8 +27,8 @@ export const useModalClose: UseModalClose = ({
 			}
 		};
 
-		const handleEscape = ({ key }: KeyboardEvent) => {
-			if (key === 'Escape') {
+		const handleEscape = (evt: KeyboardEvent) => {
+			if (evt.key === 'Escape') {
 				setClosed();
 			}
 		};

@@ -37,10 +37,33 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 	// ссылка на элемент контейнера для формы
 	const containerRef = useRef<HTMLElement | null>(null);
 
+	// ссылка на кнопку
+	//
+	// Нужна для того, чтобы передать её в хук useModalClose как элемент,
+	// по которому не должно срабатывать событие клика.
+	//
+	// Возникает баг, при котором отрабатываются и click
+	// по кнопке, и mousedown в хуке, и получается эффект, когда при
+	// БЫСТРОМ щелчке по кнопке открытия/закрытия панели после события mousedown
+	// она начинает уезжать из-за css transition, но ее успевает отловить
+	// событие click'а по кнопке, так как и нажитие, и отпускание происходит
+	// на самой кнопке, из-за чего событие click отрабатывает уже со снятым
+	// состоянием isOpened, соответственно isOpened возвращается в true,
+	// и панель возвращается обратно в открытое состояние.
+	// Для воспроизведения бага щелчок должен быть настолько быстрым,
+	// чтобы панель не успела уехать до отпускания мыши, то есть и нажатие, и
+	// отпускание производится НАД кнопкой
+	//
+	// На данный момент я нашел только один способ это починить:
+	// - передать в хук ref на эту кнопку, чтобы по ней событие не отрабатывалось
+	// Способ с промежуточным состоянием (между "открыто" и "закрыто")
+	// рассматривать не стал
+	const buttonRef = useRef<HTMLDivElement | null>(null);
+
 	useModalClose({
 		isOpened,
 		setClosed: () => setIsOpened(false),
-		selfRefs: containerRef,
+		selfRefs: [containerRef, buttonRef],
 	});
 
 	const submitForm = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -68,6 +91,7 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 	return (
 		<>
 			<ArrowButton
+				ref={buttonRef}
 				willCloseOnClick={isOpened}
 				onClick={() => setIsOpened(!isOpened)}
 			/>
