@@ -39,7 +39,7 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 	const [isOpened, setIsOpened] = useState<boolean>(false);
 
 	// ссылка на элемент контейнера для формы
-	const containerRef = useRef<HTMLElement>(null);
+	const containerRef = useRef<HTMLElement | null>(null);
 
 	useOutsideClick({
 		rootRefs: containerRef,
