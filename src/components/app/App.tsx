@@ -9,7 +9,6 @@ import {
 } from 'src/constants/articleProps';
 import { Article } from '../article';
 import { ArticleParamsForm } from '../article-params-form';
-import { InputArticleParams } from '../input-article-params';
 
 const articleStateToStyle = (articleState: ArticleStateType) => ({
 	'--font-family': articleState.fontFamilyOption.value,
@@ -24,22 +23,17 @@ export const App = () => {
 	const [articleStyleState, setArticleStyleState] =
 		useState<ArticleStateType>(defaultArticleState);
 
-	// стиль, который вводится пользователем
-	const [inputArticleStyleState, setInputArticleStyleState] =
-		useState<ArticleStateType>(defaultArticleState);
-
 	// видимость формы параметров
 	const [articleParamsFormOpened, setArticleParamsFormOpened] =
 		useState<boolean>(false);
 
 	// при утверждении формы ввода параметров устанавливаем их в стили статьи
-	const submitArticleParamsForm = () => {
-		setArticleStyleState(inputArticleStyleState);
+	const submitArticleParamsForm = (articleState: ArticleStateType) => {
+		setArticleStyleState(articleState);
 		setArticleParamsFormOpened(false);
 	};
 
-	const resetArticleParamsForm = () => {
-		setInputArticleStyleState(defaultArticleState);
+	const onArticleParamsFormReset = () => {
 		setArticleStyleState(defaultArticleState);
 		setArticleParamsFormOpened(false);
 	};
@@ -52,13 +46,7 @@ export const App = () => {
 				open={articleParamsFormOpened}
 				setOpen={setArticleParamsFormOpened}
 				submit={submitArticleParamsForm}
-				reset={resetArticleParamsForm}>
-				{/* поля ввода параметров передаются как "дети" формы */}
-				<InputArticleParams
-					input={inputArticleStyleState}
-					setInput={setInputArticleStyleState}
-				/>
-			</ArticleParamsForm>
+				reset={onArticleParamsFormReset}></ArticleParamsForm>
 			<Article />
 		</div>
 	);
