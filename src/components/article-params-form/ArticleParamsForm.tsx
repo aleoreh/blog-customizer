@@ -15,7 +15,7 @@ import {
 	fontFamilyOptions,
 	fontSizeOptions,
 } from 'src/constants/articleProps';
-import { useOutsideClick } from 'src/hooks/useOutsideClick';
+import { useModalClose } from 'src/hooks/useModalClose';
 import { RadioGroup } from '../radio-group';
 import { Select } from '../select';
 import { Separator } from '../separator';
@@ -41,9 +41,10 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 	// ссылка на элемент контейнера для формы
 	const containerRef = useRef<HTMLElement | null>(null);
 
-	useOutsideClick({
-		rootRefs: containerRef,
-		onClick: () => setIsOpened(false),
+	useModalClose({
+		isOpened,
+		setClosed: () => setIsOpened(false),
+		selfRefs: containerRef,
 	});
 
 	const submitForm = (evt: React.FormEvent<HTMLFormElement>) => {

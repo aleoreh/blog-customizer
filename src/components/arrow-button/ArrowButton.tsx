@@ -9,11 +9,6 @@ type ArrowButton = (props: {
 }) => JSX.Element;
 
 export const ArrowButton: ArrowButton = ({ willCloseOnClick, onClick }) => {
-	const clickHandler = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		evt.stopPropagation();
-		onClick();
-	};
-
 	return (
 		/* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */
 		<div
@@ -24,7 +19,7 @@ export const ArrowButton: ArrowButton = ({ willCloseOnClick, onClick }) => {
 				styles.container,
 				willCloseOnClick && styles.container_open
 			)}
-			onClick={clickHandler}>
+			onClick={onClick}>
 			<img
 				src={arrow}
 				alt='иконка стрелочки'
