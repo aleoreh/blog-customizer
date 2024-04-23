@@ -21,13 +21,9 @@ import { Select } from '../select';
 import { Separator } from '../separator';
 import { Text } from '../text';
 
-export type SetOpen = (value: boolean) => void;
-export type Submit = (articleState: ArticleStateType) => void;
-export type Reset = () => void;
-
 type ArticleParamsForm = (props: {
-	submit: Submit;
-	reset: Reset;
+	submit: (articleState: ArticleStateType) => void;
+	reset: () => void;
 }) => JSX.Element;
 
 export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
@@ -62,10 +58,10 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 
 	const onOptionSelected =
 		(optionName: keyof ArticleStateType) =>
-		(option: OptionType): void => {
+		(selected: OptionType): void => {
 			setInputArticleStyleState({
 				...inputArticleStyleState,
-				[optionName]: option,
+				[optionName]: selected,
 			});
 		};
 

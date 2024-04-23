@@ -1,3 +1,5 @@
+// TODO: вынести в npm package
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const log = (...data: any) => {
 	console.log(...data);

@@ -10,6 +10,7 @@ import {
 import { Article } from '../article';
 import { ArticleParamsForm } from '../article-params-form';
 
+// вынесем в отдельную функцию для улучшения читаемости JSX в компоненте
 const articleStateToStyle = (articleState: ArticleStateType) => ({
 	'--font-family': articleState.fontFamilyOption.value,
 	'--font-size': articleState.fontSizeOption.value,
