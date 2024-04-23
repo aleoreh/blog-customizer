@@ -1,4 +1,5 @@
 import {
+	ArticleStateType,
 	OptionType,
 	backgroundColors,
 	contentWidthArr,
@@ -6,67 +7,25 @@ import {
 	fontFamilyOptions,
 	fontSizeOptions,
 } from 'src/constants/articleProps';
-import { ArticleStyle } from 'src/types';
 import { RadioGroup } from '../radio-group';
 import { Select } from '../select';
 import { Separator } from '../separator';
 import { Text } from '../text';
 
 type InputArticleParams = (props: {
-	input: ArticleStyle;
-	setInput: (articleStyle: ArticleStyle) => void;
+	input: ArticleStateType;
+	setInput: (articleStyle: ArticleStateType) => void;
 }) => JSX.Element;
 
 /**
  * Компонент, отображающий поля ввода настроек
  */
 export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
-	// семейство шрифтов
-	const defaultFont =
-		fontFamilyOptions.find((x) => x.value === input['--font-family']) ||
-		fontFamilyOptions[0];
-
-	const onFontSelected = (font: OptionType) => {
-		setInput({ ...input, '--font-family': font.value });
-	};
-
-	// размер шрифта
-	const defaultFontSize =
-		fontSizeOptions.find((x) => x.value === input['--font-size']) ||
-		fontSizeOptions[0];
-
-	const onFontSizeSelected = (fontSize: OptionType) => {
-		setInput({
-			...input,
-			'--font-size': fontSize.value,
-		});
-	};
-
-	// цвет текста
-	const defaultFontColor =
-		fontColors.find((x) => x.value === input['--font-color']) || fontColors[0];
-
-	const onFontColorSelected = (fontColor: OptionType) => {
-		setInput({ ...input, '--font-color': fontColor.value });
-	};
-
-	// цвет фона
-	const defaultBackgroundColor =
-		backgroundColors.find((x) => x.value === input['--bg-color']) ||
-		backgroundColors[0];
-
-	const onBackgroundColorSelected = (bgColor: OptionType) => {
-		setInput({ ...input, '--bg-color': bgColor.value });
-	};
-
-	// ширина контента
-	const defaultContentWidth =
-		contentWidthArr.find((x) => x.value === input['--container-width']) ||
-		contentWidthArr[0];
-
-	const onContentWidthSelected = (contentWidth: OptionType) => {
-		setInput({ ...input, '--container-width': contentWidth.value });
-	};
+	const onOptionSelected =
+		(optionName: keyof ArticleStateType) =>
+		(option: OptionType): void => {
+			setInput({ ...input, [optionName]: option });
+		};
 
 	return (
 		<>
@@ -76,35 +35,35 @@ export const InputArticleParams: InputArticleParams = ({ input, setInput }) => {
 			<Select
 				title='Шрифт'
 				options={fontFamilyOptions}
-				selected={defaultFont}
-				onChange={onFontSelected}
+				selected={input.fontFamilyOption}
+				onChange={onOptionSelected('fontFamilyOption')}
 			/>
 			<RadioGroup
-				key={input['--font-size']}
+				key='font-size-group'
 				title='Размер шрифта'
 				name='fontSize'
 				options={fontSizeOptions}
-				selected={defaultFontSize}
-				onChange={onFontSizeSelected}
+				selected={input.fontSizeOption}
+				onChange={onOptionSelected('fontSizeOption')}
 			/>
 			<Select
 				title='Цвет шрифта'
 				options={fontColors}
-				selected={defaultFontColor}
-				onChange={onFontColorSelected}
+				selected={input.fontColor}
+				onChange={onOptionSelected('fontColor')}
 			/>
 			<Separator />
 			<Select
 				title='Цвет фона'
 				options={backgroundColors}
-				selected={defaultBackgroundColor}
-				onChange={onBackgroundColorSelected}
+				selected={input.backgroundColor}
+				onChange={onOptionSelected('backgroundColor')}
 			/>
 			<Select
 				title='Ширина контента'
 				options={contentWidthArr}
-				selected={defaultContentWidth}
-				onChange={onContentWidthSelected}
+				selected={input.contentWidth}
+				onChange={onOptionSelected('contentWidth')}
 			/>
 		</>
 	);

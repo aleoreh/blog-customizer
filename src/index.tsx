@@ -23,34 +23,6 @@ const articleStateToStyle = (articleState: ArticleStateType) => ({
 	'--bg-color': articleState.backgroundColor.value,
 });
 
-const styleToArticleState = (
-	articleStyle: ReturnType<typeof articleStateToStyle>,
-	defaultArticleState: ArticleStateType
-): ArticleStateType => {
-	return {
-		fontFamilyOption: {
-			...defaultArticleState.fontFamilyOption,
-			value: articleStyle['--font-family'],
-		},
-		fontColor: {
-			...defaultArticleState.fontColor,
-			value: articleStyle['--font-color'],
-		},
-		backgroundColor: {
-			...defaultArticleState.backgroundColor,
-			value: articleStyle['--bg-color'],
-		},
-		contentWidth: {
-			...defaultArticleState.contentWidth,
-			value: articleStyle['--container-width'],
-		},
-		fontSizeOption: {
-			...defaultArticleState.fontSizeOption,
-			value: articleStyle['--font-size'],
-		},
-	};
-};
-
 const App = () => {
 	// стиль, который применяется к статье
 	const [articleStyleState, setArticleStyleState] =
@@ -87,12 +59,8 @@ const App = () => {
 				reset={resetArticleParamsForm}>
 				{/* поля ввода параметров передаются как "дети" формы */}
 				<InputArticleParams
-					input={articleStateToStyle(inputArticleStyleState)}
-					setInput={(x) => {
-						setInputArticleStyleState(
-							styleToArticleState(x, defaultArticleState)
-						);
-					}}
+					input={inputArticleStyleState}
+					setInput={setInputArticleStyleState}
 				/>
 			</ArticleParamsForm>
 			<Article />
