@@ -22,11 +22,12 @@ import { Separator } from '../separator';
 import { Text } from '../text';
 
 type ArticleParamsForm = (props: {
-	submit: (articleState: ArticleStateType) => void;
-	reset: () => void;
+	setArticleStyleState: (articleState: ArticleStateType) => void;
 }) => JSX.Element;
 
-export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
+export const ArticleParamsForm: ArticleParamsForm = ({
+	setArticleStyleState: setArticleParams,
+}) => {
 	// стиль, который вводится пользователем
 	const [inputArticleStyleState, setInputArticleStyleState] =
 		useState<ArticleStateType>(defaultArticleState);
@@ -45,14 +46,14 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 
 	const submitForm = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
-		submit(inputArticleStyleState);
+		setArticleParams(inputArticleStyleState);
 		setIsOpened(false);
 	};
 
 	const resetForm = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		setInputArticleStyleState(defaultArticleState);
-		reset();
+		setArticleParams(defaultArticleState);
 		setIsOpened(false);
 	};
 

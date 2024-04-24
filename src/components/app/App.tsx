@@ -24,22 +24,12 @@ export const App = () => {
 	const [articleStyleState, setArticleStyleState] =
 		useState<ArticleStateType>(defaultArticleState);
 
-	// при утверждении формы ввода параметров устанавливаем их в стили статьи
-	const submitArticleParamsForm = (articleState: ArticleStateType) => {
-		setArticleStyleState(articleState);
-	};
-
-	const onArticleParamsFormReset = () => {
-		setArticleStyleState(defaultArticleState);
-	};
-
 	return (
 		<div
 			className={clsx(styles.main)}
 			style={articleStateToStyle(articleStyleState) as CSSProperties}>
 			<ArticleParamsForm
-				submit={submitArticleParamsForm}
-				reset={onArticleParamsFormReset}></ArticleParamsForm>
+				setArticleStyleState={setArticleStyleState}></ArticleParamsForm>
 			<Article />
 		</div>
 	);
