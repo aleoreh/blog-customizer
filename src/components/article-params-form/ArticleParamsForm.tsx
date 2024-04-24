@@ -26,7 +26,7 @@ type ArticleParamsForm = (props: {
 }) => JSX.Element;
 
 export const ArticleParamsForm: ArticleParamsForm = ({
-	setArticleStyleState: setArticleParams,
+	setArticleStyleState,
 }) => {
 	// стиль, который вводится пользователем
 	const [inputArticleStyleState, setInputArticleStyleState] =
@@ -46,14 +46,14 @@ export const ArticleParamsForm: ArticleParamsForm = ({
 
 	const submitForm = (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
-		setArticleParams(inputArticleStyleState);
+		setArticleStyleState(inputArticleStyleState);
 		setIsOpened(false);
 	};
 
 	const resetForm = (evt: React.FormEvent) => {
 		evt.preventDefault();
 		setInputArticleStyleState(defaultArticleState);
-		setArticleParams(defaultArticleState);
+		setArticleStyleState(defaultArticleState);
 		setIsOpened(false);
 	};
 
