@@ -1,27 +1,21 @@
 import { useEffect } from 'react';
 
 type UseModalClose = (params: {
-	selfRefs: React.RefObject<HTMLElement> | Array<React.RefObject<HTMLElement>>;
+	containerRef: React.RefObject<HTMLElement>;
 	isOpened: boolean;
 	setClosed: () => void;
 }) => void;
 
 export const useModalClose: UseModalClose = ({
-	selfRefs,
+	containerRef,
 	isOpened,
 	setClosed,
 }) => {
 	useEffect(() => {
 		if (!isOpened) return;
 
-		const normalizedSelfRefs = Array.isArray(selfRefs) ? selfRefs : [selfRefs];
-
-		// отлавливается на элементах, НЕ включенных в selfRefs
 		const handleMousedown = ({ target }: MouseEvent) => {
-			if (
-				target instanceof Node &&
-				!normalizedSelfRefs.some((ref) => ref.current?.contains(target))
-			) {
+			if (target instanceof Node && !containerRef.current?.contains(target)) {
 				setClosed();
 			}
 		};
@@ -39,5 +33,5 @@ export const useModalClose: UseModalClose = ({
 			window.removeEventListener('mousedown', handleMousedown);
 			window.removeEventListener('keydown', handleEscape);
 		};
-	}, [selfRefs, isOpened, setClosed]);
+	}, [containerRef, isOpened, setClosed]);
 };

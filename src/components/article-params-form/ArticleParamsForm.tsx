@@ -40,7 +40,7 @@ export const ArticleParamsForm: ArticleParamsForm = ({ submit, reset }) => {
 	useModalClose({
 		isOpened,
 		setClosed: () => setIsOpened(false),
-		selfRefs: containerRef,
+		containerRef,
 	});
 
 	const submitForm = (evt: React.FormEvent<HTMLFormElement>) => {
